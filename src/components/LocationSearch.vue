@@ -32,6 +32,7 @@
 					v-for="fetchedLocation in fetchedLocations"
 					:key="fetchedLocation.id"
 					class="cursor-pointer py-2 px-1"
+					@click="previewWeather(fetchedLocation)"
 				>
 					{{ fetchedLocation.place_name }}
 				</li>
@@ -43,11 +44,14 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const searchQuery = ref("");
 const queryTimeout = ref(null);
 const fetchedLocations = ref(null);
 const searchError = ref(null);
+
+const router = useRouter();
 
 const getSearchResults = () => {
 	clearTimeout(queryTimeout.value);
@@ -64,8 +68,6 @@ const getSearchResults = () => {
 		} else {
 			fetchLocations.value = null;
 		}
-
-		console.log(fetchedLocations.value);
 	}, 300);
 };
 
@@ -76,8 +78,24 @@ const fetchLocations = async () => {
 		}.json?access_token=${import.meta.env.VITE_MAPBOX_KEY}&types=place`
 	);
 
-	console.log(response);
-
 	return response.data.features;
+};
+
+const previewWeather = (location) => {
+	console.log(location);
+	const [city, state, country] = location.place_name.split(",");
+
+	router.push({
+		name: "weatherView",
+		params: {
+			country: country.trim(),
+			state: state.trim(),
+			city: city.trim(),
+		},
+		query: {
+			lon: location.geometry.coordinates[0],
+			lat: location.geometry.coordinates[1],
+		},
+	});
 };
 </script>
