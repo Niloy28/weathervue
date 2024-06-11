@@ -11,33 +11,14 @@
       </p>
     </div>
 
-    <!-- Weather View -->
-    <div class="m-2 flex items-center justify-around text-white">
-      <div class="flex flex-col items-start">
-        <h3 class="text-2xl">{{ route.params.city }}</h3>
-        <h5 class="text-xl">
-          {{
-            dayjs(weatherData.current.localTime).format(
-              'dddd[,] Do MMMM[,] YYYY[,] hh:mma'
-            )
-          }}
-        </h5>
-        <p class="mt-2 text-5xl font-bold">
-          {{ Math.round(weatherData.current.temp) }}°C
-        </p>
-        <p class="my-1">
-          Feels like {{ Math.round(weatherData.current.feels_like) }}°C
-        </p>
-        <p class="capitalize">
-          {{ weatherData.current.weather[0].description }}
-        </p>
-      </div>
-      <img
-        class="h-auto w-40"
-        :src="`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`"
-        alt="weather icon"
-      />
-    </div>
+    <CurrentWeather
+      :city-name="route.params.city"
+      :current-weather="weatherData.current"
+    />
+
+    <hr class="w-full border border-white border-opacity-20" />
+
+    <div class="w-full max-w-screen-md py-12"></div>
   </div>
 </template>
 
@@ -45,6 +26,7 @@
 import axios from 'axios'
 import dayjs from '../../utils/dayjs'
 import { useRoute } from 'vue-router'
+import CurrentWeather from '@/components/CurrentWeather.vue'
 
 const route = useRoute()
 
