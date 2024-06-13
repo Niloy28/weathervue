@@ -18,7 +18,7 @@
 
     <hr class="w-full border border-white border-opacity-20" />
 
-    <div class="w-full max-w-screen-md py-12"></div>
+    <HourlyWeather />
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import axios from 'axios'
 import dayjs from '../../utils/dayjs'
 import { useRoute } from 'vue-router'
 import CurrentWeather from '@/components/CurrentWeather.vue'
+import HourlyWeather from '@/components/HourlyWeather.vue'
 
 const route = useRoute()
 
@@ -41,11 +42,13 @@ const getWeatherData = async () => {
     )
 
     // get timezone offset in ms
-    const timezoneOffset = weatherData.data.timezone_offset * 1000
-    weatherData.data.current.localTime = dayjs.unix(1718001519).format()
+    const timezone = weatherData.data.timezone
+    weatherData.data.current.localTime = dayjs(weatherData.data.current.dt).tz(
+      timezone
+    )
 
     weatherData.data.hourly.forEach((hour) => {
-      hour.localTime = dayjs(hour.dt + timezoneOffset).format()
+      hour.localTime = dayjs(hour.dt * 1000).tz(timezone)
     })
 
     return weatherData.data
