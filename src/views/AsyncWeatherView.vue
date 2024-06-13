@@ -18,7 +18,7 @@
 
     <hr class="w-full border border-white border-opacity-20" />
 
-    <HourlyWeather />
+    <HourlyWeather :hourly-weather="weatherData.hourly" />
   </div>
 </template>
 
