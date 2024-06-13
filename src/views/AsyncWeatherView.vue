@@ -21,6 +21,8 @@
     <HourlyWeather :hourly-weather="weatherData.hourly" />
 
     <SectionBorder />
+
+    <WeeklyWeather :weekly-weather="weatherData.daily" />
   </div>
 </template>
 
@@ -31,6 +33,7 @@ import { useRoute } from 'vue-router'
 import CurrentWeather from '@/components/CurrentWeather.vue'
 import HourlyWeather from '@/components/HourlyWeather.vue'
 import SectionBorder from '../components/SectionBorder.vue'
+import WeeklyWeather from '@/components/WeeklyWeather.vue'
 
 const route = useRoute()
 
@@ -44,7 +47,7 @@ const getWeatherData = async () => {
       }&units=metric`
     )
 
-    // get timezone offset in ms
+    // get timezone
     const timezone = weatherData.data.timezone
     weatherData.data.current.localTime = dayjs(weatherData.data.current.dt).tz(
       timezone
@@ -52,6 +55,10 @@ const getWeatherData = async () => {
 
     weatherData.data.hourly.forEach((hour) => {
       hour.localTime = dayjs(hour.dt * 1000).tz(timezone)
+    })
+
+    weatherData.data.daily.forEach((day) => {
+      day.localTime = dayjs(day.dt * 1000).tz(timezone)
     })
 
     return weatherData.data
