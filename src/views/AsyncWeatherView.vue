@@ -16,9 +16,11 @@
       :current-weather="weatherData.current"
     />
 
-    <hr class="w-full border border-white border-opacity-20" />
+    <SectionBorder />
 
     <HourlyWeather :hourly-weather="weatherData.hourly" />
+
+    <SectionBorder />
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import dayjs from '../../utils/dayjs'
 import { useRoute } from 'vue-router'
 import CurrentWeather from '@/components/CurrentWeather.vue'
 import HourlyWeather from '@/components/HourlyWeather.vue'
+import SectionBorder from '../components/SectionBorder.vue'
 
 const route = useRoute()
 
