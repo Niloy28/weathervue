@@ -18,7 +18,7 @@
 import dayjs from '../../utils/dayjs'
 
 defineProps({
-  day: Number,
+  day: Object,
   icon: String,
   low: Number,
   high: Number,

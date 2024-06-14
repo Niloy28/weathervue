@@ -13,7 +13,7 @@
 import dayjs from '../../utils/dayjs'
 
 defineProps({
-  time: Number,
+  time: Object,
   icon: String,
   temp: Number,
 })
