@@ -12,12 +12,13 @@ import { ref } from 'vue'
 import CityCard from './CityCard.vue'
 import { useRouter } from 'vue-router'
 
-const SAVED_CITIES_REF = 'savedCities'
 const savedCities = ref([])
 const router = useRouter()
 
 const getCities = async () => {
-  const storedCities = localStorage.getItem(SAVED_CITIES_REF)
+  const storedCities = localStorage.getItem(
+    import.meta.env.VITE_SAVED_CITIES_REF
+  )
 
   if (storedCities) {
     savedCities.value = JSON.parse(storedCities)
@@ -49,6 +50,7 @@ const goToWeatherView = (city) => {
       city: city.city,
     },
     query: {
+      id: city.id,
       lon: city.coords.lon,
       lat: city.coords.lat,
     },

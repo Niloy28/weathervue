@@ -75,7 +75,7 @@ const toggleModal = () => {
 }
 
 const addCity = () => {
-  const storage = localStorage.getItem(SAVED_CITIES_REF)
+  const storage = localStorage.getItem(import.meta.env.VITE_SAVED_CITIES_REF)
   if (storage) {
     savedCities.value = JSON.parse(storage)
   }
@@ -92,10 +92,14 @@ const addCity = () => {
   }
 
   savedCities.value.push(locationObj)
-  localStorage.setItem(SAVED_CITIES_REF, JSON.stringify(savedCities.value))
+  localStorage.setItem(
+    import.meta.env.VITE_SAVED_CITIES_REF,
+    JSON.stringify(savedCities.value)
+  )
 
   let newQuery = { ...route.query }
   delete newQuery.preview
+  newQuery.id = locationObj.id
 
   router.replace({ query: newQuery })
 }

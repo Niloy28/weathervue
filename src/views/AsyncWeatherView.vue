@@ -23,19 +23,29 @@
     <SectionBorder />
 
     <WeeklyWeather :weekly-weather="weatherData.daily" />
+
+    <div
+      v-if="!isPreviewRoute()"
+      class="flex cursor-pointer items-center gap-2 pb-12 text-white duration-150 hover:text-red-500"
+      @click="removeCity"
+    >
+      <i class="fa-solid fa-trash-can"></i>
+      <p>Remove City</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import axios from 'axios'
 import dayjs from '../../utils/dayjs'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import CurrentWeather from '@/components/CurrentWeather.vue'
 import HourlyWeather from '@/components/HourlyWeather.vue'
 import SectionBorder from '../components/SectionBorder.vue'
 import WeeklyWeather from '@/components/WeeklyWeather.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const getWeatherData = async () => {
   try {
@@ -65,6 +75,27 @@ const getWeatherData = async () => {
   } catch (error) {
     console.error(error)
   }
+}
+
+const removeCity = () => {
+  const storage = JSON.parse(
+    localStorage.getItem(import.meta.env.VITE_SAVED_CITIES_REF)
+  )
+
+  localStorage.setItem(
+    import.meta.env.VITE_SAVED_CITIES_REF,
+    JSON.stringify(
+      storage.filter((savedCity) => savedCity.id !== route.query.id)
+    )
+  )
+
+  router.push({
+    name: 'home',
+  })
+}
+
+const isPreviewRoute = () => {
+  return Object.keys(route.query).includes('preview')
 }
 
 const weatherData = await getWeatherData()
