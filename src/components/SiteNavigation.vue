@@ -82,6 +82,7 @@ const addCity = () => {
 
   const locationObj = {
     id: uuidv4(),
+    country: route.params.country,
     state: route.params.state,
     city: route.params.city,
     coords: {
