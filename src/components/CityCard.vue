@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-weather-tertiary flex cursor-pointer rounded-md px-3 py-6 shadow-md"
+    class="flex cursor-pointer rounded-md bg-weather-tertiary px-3 py-6 shadow-md"
   >
-    <div class="flex flex-1 flex-col">
+    <div class="flex flex-1 flex-col self-center">
       <h2 class="text-3xl">{{ city.city }}</h2>
       <h3>{{ city.state }}, {{ city.country }}</h3>
     </div>
