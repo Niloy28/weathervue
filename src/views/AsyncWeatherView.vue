@@ -50,7 +50,7 @@ const router = useRouter()
 const getWeatherData = async () => {
   try {
     const weatherData = await axios.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${
+      `${import.meta.env.VITE_OPENWEATHER_WEATHER_BASE_URL}?lat=${
         route.query.lat
       }&lon=${route.query.lon}&exclude=minutely&appid=${
         import.meta.env.VITE_OPENWEATHER_API_KEY
