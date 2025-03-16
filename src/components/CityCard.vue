@@ -4,7 +4,10 @@
   >
     <div class="flex flex-1 flex-col self-center">
       <h2 class="text-3xl">{{ city.city }}</h2>
-      <h3>{{ city.state }}, {{ city.country }}</h3>
+      <h3 class="flex gap-1">
+        <div v-if="city.state">{{ city.state }},</div>
+        <div>{{ city.country }}</div>
+      </h3>
     </div>
 
     <div class="flex flex-col gap-2">
