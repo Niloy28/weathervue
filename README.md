@@ -2,7 +2,7 @@
 
 This is a Vue.js based weather application styled with TailwindCSS. The app allows users to search for weather information by location on its home page.
 
-## Features 💧
+## Features 🎉
 
 - Location searching feature on the home page (with pre-emptive suggestions!)
 - Pin locations of interest to the homepage for quick access
@@ -12,7 +12,14 @@ This is a Vue.js based weather application styled with TailwindCSS. The app allo
 
 The weather data is fetched from [OpenWeatherMap's](https://openweathermap.org/) [OneAPI](https://openweathermap.org/api/one-call-3), and the location data is fetched from OpenWeatherMap's [GeocodingAPI](https://openweathermap.org/api/geocoding-api).
 
-## Screenshots
+## Technologies ⚙️
+- [Vue](https://vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/)
+- [Dayjs](https://day.js.org/)
+
+## Screenshots 📷
 ### Home Page
 ![Screenshot 2025-03-16 at 17-14-50 Home Weather Vue](https://github.com/user-attachments/assets/b02cfd31-c7b8-43f5-b8aa-ded7f7dba476)
 
@@ -50,10 +57,10 @@ The weather data is fetched from [OpenWeatherMap's](https://openweathermap.org/)
    pnpm build
    ```
 
-## Recommended IDE Setup
+## Recommended IDE Setup 📝
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Customize configuration
+## Customize configuration 🔧
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
