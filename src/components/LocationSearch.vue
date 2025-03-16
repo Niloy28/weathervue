@@ -31,11 +31,12 @@
         <li
           v-for="fetchedLocation in fetchedLocations"
           :key="fetchedLocation.lat"
-          class="cursor-pointer px-1 py-2"
+          class="flex cursor-pointer gap-1 px-1 py-2"
           @click="previewWeather(fetchedLocation)"
         >
-          {{ fetchedLocation.name }}, {{ fetchedLocation.state }},
-          {{ fetchedLocation.country }}
+          <p>{{ fetchedLocation.name }},</p>
+          <p v-if="fetchedLocation.state">{{ fetchedLocation.state }},</p>
+          <p>{{ fetchedLocation.country }}</p>
         </li>
       </template>
     </ul>
@@ -93,7 +94,6 @@ const previewWeather = (location) => {
     name: 'weatherView',
     params: {
       country: country.trim(),
-      state: state.trim(),
       city: city.trim(),
     },
     query: {
